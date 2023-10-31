@@ -13,3 +13,9 @@ SignUpScreen::~SignUpScreen()
 {
     delete ui;
 }
+
+void SignUpScreen::on_pushButton_LogIn_clicked()
+{
+    emit changeToLoginScreen();
+}
+

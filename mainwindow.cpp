@@ -29,12 +29,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Screens
     loginScreen = new LoginScreen(db);
+    signUpScreen = nullptr;
 
     stackedWidget = new QStackedWidget;
     stackedWidget->addWidget(loginScreen);
     boxLayout->addWidget(stackedWidget);
 
     stackedWidget->setCurrentWidget(loginScreen);
+
+    // connections
+    QObject::connect(loginScreen, &LoginScreen::signUpButtonClicked, this, &MainWindow::changeWidgetToSignUpScreen);
 }
 
 MainWindow::~MainWindow()
@@ -42,3 +46,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::changeWidgetToSignUpScreen() {
+    if (!signUpScreen) {
+        signUpScreen = new SignUpScreen(db);
+        stackedWidget->addWidget(signUpScreen);
+
+        QObject::connect(signUpScreen, &SignUpScreen::changeToLoginScreen, this, &MainWindow::changeWidgetToLoginScreen);
+    }
+    stackedWidget->setCurrentWidget(signUpScreen);
+}
+
+void MainWindow::changeWidgetToLoginScreen() {
+    if (!loginScreen) {
+        loginScreen = new LoginScreen(db);
+        stackedWidget->addWidget(loginScreen);
+    }
+    stackedWidget->setCurrentWidget(loginScreen);
+}

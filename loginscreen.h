@@ -16,6 +16,12 @@ public:
     explicit LoginScreen(QSqlDatabase* db_conn, QWidget *parent = nullptr);
     ~LoginScreen();
 
+signals:
+    void signUpButtonClicked();
+
+private slots:
+    void on_pushButton_SignUp_clicked();
+
 private:
     Ui::LoginScreen *ui;
     QSqlDatabase* db;

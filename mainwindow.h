@@ -8,6 +8,7 @@
 #include <QSqlError>
 
 #include "loginscreen.h"
+#include "signupscreen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,11 +22,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void changeWidgetToSignUpScreen();
+
+    void changeWidgetToLoginScreen();
+
 private:
     Ui::MainWindow *ui;
     QSqlDatabase* db;
     QVBoxLayout* boxLayout;
     QStackedWidget* stackedWidget;
     LoginScreen* loginScreen;
+    SignUpScreen* signUpScreen;
 };
 #endif // MAINWINDOW_H
