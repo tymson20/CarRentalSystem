@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStackedWidget>
+#include <QVBoxLayout>
+#include <QSqlDatabase>
+#include <QSqlError>
+
+#include "loginscreen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +23,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QSqlDatabase* db;
+    QVBoxLayout* boxLayout;
+    QStackedWidget* stackedWidget;
+    LoginScreen* loginScreen;
 };
 #endif // MAINWINDOW_H
