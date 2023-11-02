@@ -1,0 +1,47 @@
+CREATE DATABASE carRentalSystem;
+USE carRentalSystem;
+
+CREATE TABLE users(
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(30) UNIQUE NOT NULL,
+	password VARCHAR(20) NOT NULL,
+	first_name VARCHAR(20),
+	last_name VARCHAR(20),
+	phone_number VARCHAR(9) UNIQUE,
+	service_member BOOL DEFAULT false,
+	covered_distance DECIMAL(4,1) DEFAULT 0,
+	spent_money DECIMAL(4,2) DEFAULT 0.0,
+	account_since DATE DEFAULT (CURRENT_DATE())
+);
+
+CREATE TABLE car_types(
+	car_type_id INT PRIMARY KEY AUTO_INCREMENT,
+        model VARCHAR(20),
+        body_type ENUM('Sedan', 'Coupe', 'Sport', 'Combi', 'Hatchback', 'Cabrio', 'SUV', 'Minivan', 'Pickup', 'Crossover'),
+        number_of_seats INT,
+        gearbox ENUM('manual', 'automatic'),
+        image BLOB,
+        description TEXT
+);
+
+CREATE TABLE vehicles(
+	vehicle_id INT PRIMARY KEY AUTO_INCREMENT,
+        registration_number VARCHAR(8) UNIQUE,
+        mileage DECIMAL(6,1),
+        car_type_id INT,
+        FOREIGN KEY(car_type_id) REFERENCES car_types(car_type_id),
+        available BOOL DEFAULT false,
+        current_location POINT
+);
+
+CREATE TABLE rentals(
+	rental_id INT PRIMARY KEY AUTO_INCREMENT,
+    	driver_id INT NOT NULL,
+    	FOREIGN KEY(driver_id) REFERENCES users(user_id),
+    	vehicle_id INT NOT NULL,
+    	FOREIGN KEY(vehicle_id) REFERENCES vehicles(vehicle_id),
+    	start_datetime DATETIME DEFAULT (NOW()),
+    	end_datatime DATETIME,
+    	price DECIMAL(3,2),
+    	distance DECIMAL(3,1)
+);
