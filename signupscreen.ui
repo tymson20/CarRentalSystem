@@ -83,7 +83,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_8">
+          <widget class="QLineEdit" name="lineEdit_FirstName">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -95,6 +95,9 @@
              <width>250</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="maxLength">
+            <number>20</number>
            </property>
           </widget>
          </item>
@@ -122,7 +125,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="lineEdit_LastName">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -134,6 +137,9 @@
              <width>250</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="maxLength">
+            <number>20</number>
            </property>
           </widget>
          </item>
@@ -161,7 +167,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_6">
+          <widget class="QLineEdit" name="lineEdit_Email">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -173,6 +179,9 @@
              <width>250</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="maxLength">
+            <number>30</number>
            </property>
           </widget>
          </item>
@@ -200,7 +209,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_10">
+          <widget class="QLineEdit" name="lineEdit_PhoneNumber">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -212,6 +221,9 @@
              <width>250</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="maxLength">
+            <number>9</number>
            </property>
           </widget>
          </item>
@@ -239,7 +251,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_7">
+          <widget class="QLineEdit" name="lineEdit_Password">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -251,6 +263,12 @@
              <width>250</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="maxLength">
+            <number>20</number>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
           </widget>
          </item>
@@ -278,7 +296,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_9">
+          <widget class="QLineEdit" name="lineEdit_ConfPassword">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -291,12 +309,18 @@
              <height>0</height>
             </size>
            </property>
+           <property name="maxLength">
+            <number>20</number>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
           </widget>
          </item>
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox">
+        <widget class="QCheckBox" name="checkBox_ServiceMember">
          <property name="text">
           <string>Service member</string>
          </property>
@@ -306,7 +330,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pushButton_SignUp">
          <property name="text">
           <string>Sign Up</string>
          </property>

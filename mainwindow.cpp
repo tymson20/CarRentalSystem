@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QSqlDatabase db_conn = QSqlDatabase::addDatabase("QMYSQL");
     db_conn.setHostName("127.0.0.1");
-    db_conn.setDatabaseName("test");
+    db_conn.setDatabaseName("carrentalsystem");
     db_conn.setUserName("root");
     db_conn.setPassword("Password4321");
     db = &db_conn;
@@ -48,7 +48,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::changeWidgetToSignUpScreen() {
     if (!signUpScreen) {
-        signUpScreen = new SignUpScreen(db);
+        signUpScreen = new SignUpScreen;
         stackedWidget->addWidget(signUpScreen);
 
         QObject::connect(signUpScreen, &SignUpScreen::changeToLoginScreen, this, &MainWindow::changeWidgetToLoginScreen);
