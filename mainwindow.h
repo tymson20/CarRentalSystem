@@ -4,11 +4,12 @@
 #include <QMainWindow>
 #include <QStackedWidget>
 #include <QVBoxLayout>
-#include <QSqlDatabase>
-#include <QSqlError>
 
 #include "loginscreen.h"
 #include "signupscreen.h"
+#include "mainscreen.h"
+#include "historyscreen.h"
+#include "newtripscreen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,12 +28,20 @@ public slots:
 
     void changeWidgetToLoginScreen();
 
+    void changeWidgetToMainScreen(unsigned int user_id);
+
+    void changeWidgetToHistoryScreen(unsigned int userId);
+
+    void changeWidgetToNewTripScreen(unsigned int userId);
+
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase* db;
     QVBoxLayout* boxLayout;
     QStackedWidget* stackedWidget;
     LoginScreen* loginScreen;
     SignUpScreen* signUpScreen;
+    MainScreen* mainScreen;
+    HistoryScreen* historyScreen;
+    NewTripScreen* newTripScreen;
 };
 #endif // MAINWINDOW_H

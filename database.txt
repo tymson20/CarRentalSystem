@@ -8,29 +8,48 @@ CREATE TABLE users(
 	first_name VARCHAR(20),
 	last_name VARCHAR(20),
 	phone_number VARCHAR(9) UNIQUE,
+	current_rental_id INT,
 	service_member BOOL DEFAULT false,
-	covered_distance DECIMAL(4,1) DEFAULT 0,
-	spent_money DECIMAL(4,2) DEFAULT 0.0,
+	covered_distance DECIMAL(5,1) DEFAULT 0.0,
+	spent_money DECIMAL(6,2) DEFAULT 0.0,
 	account_since DATE DEFAULT (CURRENT_DATE())
 );
 
+CREATE TABLE brands(
+	brand_id INT PRIMARY KEY AUTO_INCREMENT,
+    	name VARCHAR(15) NOT NULL,
+    	logo BLOB
+);
+
 CREATE TABLE car_types(
-	car_type_id INT PRIMARY KEY AUTO_INCREMENT,
+    	car_type_id INT PRIMARY KEY AUTO_INCREMENT,
+	brand_id INT,
+	FOREIGN KEY(brand_id) REFERENCES brands(brand_id),
         model VARCHAR(20),
         body_type ENUM('Sedan', 'Coupe', 'Sport', 'Combi', 'Hatchback', 'Cabrio', 'SUV', 'Minivan', 'Pickup', 'Crossover'),
         number_of_seats INT,
+	horsepower INT,
         gearbox ENUM('manual', 'automatic'),
         image BLOB,
         description TEXT
 );
 
+CREATE TABLE favourite_car_types(
+    	user_id INT,
+    	FOREIGN KEY(user_id) REFERENCES users(user_id),
+    	car_type_id INT,
+    	FOREIGN KEY(car_type_id) REFERENCES car_types(car_type_id)
+);
+
 CREATE TABLE vehicles(
 	vehicle_id INT PRIMARY KEY AUTO_INCREMENT,
         registration_number VARCHAR(8) UNIQUE,
-        mileage DECIMAL(6,1),
+        mileage DECIMAL(7,1),
+	manufacture_year INT,
         car_type_id INT,
         FOREIGN KEY(car_type_id) REFERENCES car_types(car_type_id),
         available BOOL DEFAULT false,
+	price_per_hour INT,
         current_location POINT
 );
 
@@ -42,6 +61,6 @@ CREATE TABLE rentals(
     	FOREIGN KEY(vehicle_id) REFERENCES vehicles(vehicle_id),
     	start_datetime DATETIME DEFAULT (NOW()),
     	end_datatime DATETIME,
-    	price DECIMAL(3,2),
-    	distance DECIMAL(3,1)
+    	price DECIMAL(5,2),
+    	distance DECIMAL(5,1)
 );

@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -9,27 +11,36 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QSqlDatabase db_conn = QSqlDatabase::addDatabase("QMYSQL");
-    db_conn.setHostName("127.0.0.1");
-    db_conn.setDatabaseName("carrentalsystem");
-    db_conn.setUserName("root");
-    db_conn.setPassword("Password4321");
-    db = &db_conn;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    db.setHostName("127.0.0.1");
+    db.setDatabaseName("carrentalsystem");
+    db.setUserName("root");
+    db.setPassword("Password4321");
 
-    if (db->open()) {
+    if (db.open()) {
         qDebug() << "Connected";
     }
     else {
-        QSqlError err = db->lastError();
+        QSqlError err = db.lastError();
         qDebug() << "Not connected. Error:" << err.text() << "\n";
     }
+
+    QIcon icon(":/icons/images/icons/car-rental.png");
+    setWindowIcon(icon);
+    setWindowTitle("Car Rental System");
+
+    const QString styleSheet = "MainWindow {background-color: #fafafa}";
+    setStyleSheet(styleSheet);
 
     boxLayout = new QVBoxLayout;
     ui->centralwidget->setLayout(boxLayout);
 
     // Screens
-    loginScreen = new LoginScreen(db);
+    loginScreen = new LoginScreen;
     signUpScreen = nullptr;
+    mainScreen = nullptr;
+    historyScreen = nullptr;
+    newTripScreen = nullptr;
 
     stackedWidget = new QStackedWidget;
     stackedWidget->addWidget(loginScreen);
@@ -39,11 +50,16 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connections
     QObject::connect(loginScreen, &LoginScreen::signUpButtonClicked, this, &MainWindow::changeWidgetToSignUpScreen);
+    QObject::connect(loginScreen, &LoginScreen::loggedSuccessfully, this, &MainWindow::changeWidgetToMainScreen);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    if (mainScreen) {
+        delete mainScreen;
+        mainScreen = nullptr;
+    }
 }
 
 void MainWindow::changeWidgetToSignUpScreen() {
@@ -58,8 +74,44 @@ void MainWindow::changeWidgetToSignUpScreen() {
 
 void MainWindow::changeWidgetToLoginScreen() {
     if (!loginScreen) {
-        loginScreen = new LoginScreen(db);
+        loginScreen = new LoginScreen;
         stackedWidget->addWidget(loginScreen);
     }
     stackedWidget->setCurrentWidget(loginScreen);
+}
+
+void MainWindow::changeWidgetToMainScreen(unsigned int user_id) {
+    if (!mainScreen) {
+        mainScreen = new MainScreen(user_id);
+        stackedWidget->addWidget(mainScreen);
+
+        QObject::connect(mainScreen, &MainScreen::historyButtonClicked, this, &MainWindow::changeWidgetToHistoryScreen);
+        QObject::connect(mainScreen, &MainScreen::newTripButtonClicked, this, &MainWindow::changeWidgetToNewTripScreen);
+    }
+    mainScreen->updateUserData();
+    stackedWidget->setCurrentWidget(mainScreen);
+    if (signUpScreen) {
+        delete signUpScreen;
+        signUpScreen = nullptr;
+    }
+}
+
+void MainWindow::changeWidgetToHistoryScreen(unsigned int userId) {
+    if (!historyScreen) {
+        historyScreen = new HistoryScreen(userId);
+        stackedWidget->addWidget(historyScreen);
+
+        QObject::connect(historyScreen, &HistoryScreen::backButtoncliked, this, &MainWindow::changeWidgetToMainScreen);
+    }
+    stackedWidget->setCurrentWidget(historyScreen);
+}
+
+void MainWindow::changeWidgetToNewTripScreen(unsigned int userId) {
+    if (!newTripScreen) {
+        newTripScreen = new NewTripScreen(userId, this);
+        stackedWidget->addWidget(newTripScreen);
+
+        QObject::connect(newTripScreen, &NewTripScreen::backButtoncliked, this, &MainWindow::changeWidgetToMainScreen);
+    }
+    stackedWidget->setCurrentWidget(newTripScreen);
 }

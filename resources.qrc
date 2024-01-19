@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/default_pictures">
+        <file>images/default_avatar.png</file>
+        <file>images/default_car_85x64px.png</file>
+        <file>images/types_of_cars/default_car_image_400x228px.jpg</file>
+        <file>images/brands_logos/no_image_64x64px.jpg</file>
+    </qresource>
+    <qresource prefix="/background_pictures">
+        <file>images/CRS_main_page.png</file>
+        <file>images/CRS_main_page2.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>images/icons/new_trip.png</file>
+        <file>images/icons/history.png</file>
+        <file>images/icons/car.png</file>
+        <file>images/icons/clock.png</file>
+        <file>images/icons/settings.png</file>
+        <file>images/icons/back.png</file>
+        <file>images/icons/search.png</file>
+        <file>images/icons/car-rental.png</file>
+    </qresource>
+</RCC>

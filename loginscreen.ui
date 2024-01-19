@@ -13,7 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
      <property name="sizeConstraint">
@@ -36,12 +39,19 @@
       </spacer>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1,3,1,3">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1,0,0,1,3">
        <item>
         <widget class="QLabel" name="label_2">
+         <property name="minimumSize">
+          <size>
+           <width>300</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="font">
           <font>
-           <pointsize>21</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>23</pointsize>
            <bold>true</bold>
           </font>
          </property>
@@ -57,7 +67,8 @@
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <family>Segoe UI</family>
+           <pointsize>15</pointsize>
           </font>
          </property>
          <property name="text">
@@ -69,29 +80,38 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QFrame" name="frame">
          <property name="minimumSize">
           <size>
-           <width>300</width>
-           <height>0</height>
+           <width>0</width>
+           <height>100</height>
           </size>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>180</height>
-          </size>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
          </property>
-         <property name="title">
-          <string>Log In</string>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <property name="spacing">
+           <number>11</number>
+          </property>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,4">
             <item>
              <widget class="QLabel" name="label_4">
+              <property name="font">
+               <font>
+                <family>Segoe UI</family>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>E-mail</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -102,6 +122,21 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>220</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>220</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maxLength">
+               <number>30</number>
               </property>
              </widget>
             </item>
@@ -114,13 +149,37 @@
             </property>
             <item>
              <widget class="QLabel" name="label_5">
+              <property name="font">
+               <font>
+                <family>Segoe UI</family>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Password</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QLineEdit" name="lineEdit_Password">
+              <property name="minimumSize">
+               <size>
+                <width>220</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>220</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="maxLength">
+               <number>20</number>
+              </property>
               <property name="echoMode">
                <enum>QLineEdit::Password</enum>
               </property>
@@ -135,6 +194,11 @@
             </property>
             <item>
              <widget class="QCheckBox" name="checkBox_RememberMe">
+              <property name="font">
+               <font>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Remember me</string>
               </property>
@@ -157,10 +221,16 @@
              <widget class="QPushButton" name="pushButton_ForgotPassword">
               <property name="font">
                <font>
-                <italic>false</italic>
-                <bold>false</bold>
-                <underline>true</underline>
+                <pointsize>10</pointsize>
+                <bold>true</bold>
                </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	background-color: transparent;
+	color: #21add1;
+}
+QPushButton::pressed {color: #1886a3}</string>
               </property>
               <property name="text">
                <string>Forgot password?</string>
@@ -178,13 +248,40 @@
             </item>
            </layout>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButton_LogIn">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>120</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>140</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	background-color: #21add1;
+	color: white;
+	border-radius: 20px;
+	padding-bottom: 4px;
+}
+QPushButton::pressed {background-color: #1886a3}</string>
             </property>
             <property name="text">
              <string>Log In</string>
@@ -198,6 +295,19 @@
         </widget>
        </item>
        <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>15</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <property name="leftMargin">
           <number>14</number>
@@ -207,6 +317,11 @@
          </property>
          <item>
           <widget class="QLabel" name="label_6">
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Doesn't have account ?</string>
            </property>
@@ -214,11 +329,24 @@
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_SignUp">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+	background-color: transparent;
+	color: #21add1;
+}
+QPushButton:pressed {color: #1886a3}</string>
+           </property>
            <property name="text">
             <string>Sign Up</string>
            </property>
-           <property name="autoDefault">
-            <bool>false</bool>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -267,8 +395,8 @@
      </property>
      <property name="minimumSize">
       <size>
-       <width>384</width>
-       <height>582</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
      <property name="baseSize">
